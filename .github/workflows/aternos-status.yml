@@ -26,7 +26,7 @@ jobs:
 
       - name: Check server status and notify Discord
         env:
-          ATERNOS_SERVER: "NOME_DO_SEU_SERVIDOR"   # sem .aternos.me
+          ATERNOS_SERVER: "Jaime_World"   # sem .aternos.me
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           python scripts/check_status.py
