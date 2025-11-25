@@ -2,8 +2,7 @@ import os
 import json
 import requests
 
-# Configurações
-ATERNOS_SERVER = os.getenv("ATERNOS_SERVER")  # ex: "meuserver"
+ATERNOS_SERVER = os.getenv("ATERNOS_SERVER")
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 STATUS_FILE = "last_status.json"
 
@@ -35,7 +34,6 @@ def main():
     if not DISCORD_WEBHOOK_URL:
         raise RuntimeError("Variável DISCORD_WEBHOOK_URL não definida")
 
-    # pega status atual
     r = requests.get(STATUS_URL)
     r.raise_for_status()
     data = r.json()
@@ -43,12 +41,10 @@ def main():
 
     last = get_last_status()
 
-    # se nunca rodou, só salva sem notificar
     if last is None:
         save_status(online)
         return
 
-    # se mudou, manda mensagem
     if online != last:
         status_txt = "🟢 **online**" if online else "🔴 **offline**"
         msg = f"Servidor `{ATERNOS_SERVER}` agora está {status_txt}."
